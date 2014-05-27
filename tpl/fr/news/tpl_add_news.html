@@ -1,0 +1,43 @@
+
+{FILE "../common/tpl_header.html"}
+
+{FILE "../common/tpl_navbar.html"}
+
+		<div class="row">
+		<div class="col-lg-2">&nbsp;</div>
+  		<div class="col-lg-8 jumbotron">
+  		
+  			<div class="panel panel-default">
+			  <div class="panel-heading">Ajout news</div>
+			  <div class="panel-body">
+							<form action="{site_root}/admin/news/action.php" enctype="multipart/form-data" method="post">
+								<div class="input-group">
+								  <input type="text" class="form-control" placeholder="Titre" required="" name="news[news_title]" value="{title}"/>
+								</div>
+
+								<div class="input-group">
+								  <textarea rows="10" placeholder="Corps de la news" required="" name="news[news_body]">{body}</textarea> 
+								</div>
+				
+								<div class="input-group">
+								  <input type="file" accept="image/jpeg, image/png" name="image"/>
+								</div>
+				
+								<div class="input-group">
+								  Activer : <input type="checkbox" name="news[news_active]" {active}/>
+								</div>
+								<div class="text-center">
+									<input id="news_id" type="hidden" name="news_id" value="{id}" />
+									<button type="submit" class="btn btn-primary">Enregistrer</button>
+									<button class="btn btn-danger" onclick="window.location='index.php';return false;">Annuler</button>
+								</div>
+							</form>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-2">&nbsp;</div>
+	</div>
+			
+	</body>
+</html>
+<!-- END: main -->

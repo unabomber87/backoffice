@@ -1,0 +1,116 @@
+
+{FILE "../common/tpl_header.html"}
+
+{FILE "../common/tpl_navbar.html"}
+
+		<div class="row">
+		<div class="col-lg-2">&nbsp;</div>
+  		<div class="col-lg-8">
+			<div class="panel panel-success" >
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">News
+			  
+			  			
+						<div class="btn-group" style="float:right;margin-top:-6px;">
+						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+							Action <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+							<li><a href="{site_root}/admin/news/action.php">Ajouter news</a></li>
+						  </ul>
+						</div>
+
+			  
+			  
+			  </div>
+			  
+			  <div class="table-responsive">
+			  <!-- Table -->
+			  <table class="table">
+				<thead>
+				  <tr>
+				    <th>Image</th>
+				    <th>Titre</th>
+				    <th>Date de création</th>
+				    <th>Activer</th>
+				    <th>Action</th>
+				  </tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN: news_block -->
+				  <tr>
+				    <td>
+				    		
+							<div class="col-xs-6 col-md-6 ">
+								<a href="#" class="thumbnail">
+								  <img src="{site_root}/assets/uploads/{img}" class="img-responsive" alt="{id}">
+								</a>
+							</div>
+							
+				    </td>
+				    <td>{title}</td>
+				    <td>{date}</td>
+				    <td><input type="checkbox" id="cb_{id}" class="switcher" {active}/></td>
+				    <td>
+				    		<a class="btn btn-primary" href="edit.php?news_id={id}">
+								<i class="icon-pencil icon-white"></i>Edit
+							</a>
+							
+							<a class="btn btn-danger" data-toggle="modal" href="#myAlert{id}">
+								<i class="icon-remove icon-white"></i>Delete
+							</a>
+							<!-- modal -->				
+							<div id="myAlert{id}" class="modal fade">
+							  <div class="modal-dialog">
+								<div class="modal-content">
+								  <div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">Attention</h4>
+								  </div>
+								  <div class="modal-body">
+									<p>Voulez-vous supprimer cet élément ?</p>
+								  </div>
+								  <div class="modal-footer">
+										<a class="btn btn-primary" href="delete.php?news_id={id}">Ok</a>
+										<a class="btn" data-dismiss="modal" href="#">Annuler</a>
+								  </div>
+								</div>
+							  </div>
+							</div>
+
+
+				    </td>
+				  </tr>
+				<!-- END: news_block -->  
+				</tbody>
+			  </table>
+			  </div>
+			</div>
+		</div>
+		<div class="col-lg-2">&nbsp;</div>
+	</div>
+	<script>
+			$( document ).ready(function() {
+					$(".switcher").bootstrapSwitch();
+					$('.switcher').on({'switchChange.bootstrapSwitch': function(event, state) {
+							  //alert(state);
+							  var id = $(this).attr('id');
+							  var res = id.split("_"); 
+							  $.ajax({
+										url: 'ajax.php',
+										data: "action=activate&state="+state+"&news_id="+res[1],
+										dataType: "json",
+										type: 'post',
+										success: function (data) {
+											if(data){
+								
+											}				
+										}
+								});
+					}
+					});
+			});
+	</script>		
+	</body>
+</html>
+<!-- END: main -->
