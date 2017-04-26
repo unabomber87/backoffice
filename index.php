@@ -21,7 +21,7 @@ if (!isset($_SESSION['user']))
 else
 {
 
-
+	var_dump("hello world");
 
 /**
 * Extract the page identifier for use with the Backlinks object
